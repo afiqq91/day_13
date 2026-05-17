@@ -1,29 +1,32 @@
+import { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
+
+import { getAllInstructors } from "../services/instructorApi";
 
 export default function InstructorListPage() {
 
-    const instructors = [
-        {
-            id: 1,
-            name: "Ahmad Bashir",
-            specialization: "Java",
-            yearsOfExperience: 5
-        },
+    const [instructors, setInstructors] = useState([]);
 
-        {
-            id: 2,
-            name: "Muhammad Ali",
-            specialization: "React",
-            yearsOfExperience: 3
-        },
+    useEffect(() => {
 
-        {
-            id: 3,
-            name: "Sarah Kamaruddin",
-            specialization: "MongoDB",
-            yearsOfExperience: 7
+        async function fetchInstructors() {
+
+            try {
+
+                const data = await getAllInstructors();
+
+                setInstructors(data);
+
+            } catch (error) {
+
+                console.error(error);
+            }
         }
-    ];
+
+        fetchInstructors();
+
+    }, []);
 
     return (
         <div>
@@ -31,10 +34,10 @@ export default function InstructorListPage() {
             <h1>Instructor List Page</h1>
 
             {
-                instructors.map((instructor) => (
+                instructors.map((instructor, index) => (
 
                     <div
-                        key={instructor.id}
+                        key={index}
                         style={{
                             border: "1px solid black",
                             padding: "10px",
@@ -53,12 +56,12 @@ export default function InstructorListPage() {
                         <p>
                             Experience:
                             {" "}
-                            {instructor.yearsOfExperience}
+                            {instructor.yearsExperience}
                             {" "}
                             years
                         </p>
 
-                        <Link to={`/instructors/${instructor.id}`}>
+                        <Link to={`/instructors/${index}`}>
                             View Details
                         </Link>
 
