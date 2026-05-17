@@ -7,6 +7,9 @@ import { getAllInstructors } from "../services/instructorApi";
 export default function InstructorListPage() {
 
     const [instructors, setInstructors] = useState([]);
+    const role = localStorage.getItem("role");
+
+    const isAdmin = role === "ADMIN";
 
     useEffect(() => {
 
@@ -32,6 +35,18 @@ export default function InstructorListPage() {
         <div>
 
             <h1>Instructor List Page</h1>
+
+            {
+                isAdmin && (
+                    <Link to="/instructors/create">
+
+                        <button>
+                            Create Instructor
+                        </button>
+
+                    </Link>
+                )
+            }
 
             {
                 instructors.map((instructor, index) => (
@@ -67,9 +82,14 @@ export default function InstructorListPage() {
 
                         <br />
 
-                        <Link to={`/instructors/${index}/edit`}>
-                            Edit
-                        </Link>
+                        {
+                            isAdmin && (
+
+                                <Link to={`/instructors/${index}/edit`}>
+                                    Edit
+                                </Link>
+                            )
+                        }
 
                     </div>
                 ))
