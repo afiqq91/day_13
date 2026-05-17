@@ -6,6 +6,7 @@ import DashboardPage from "./pages/DashboardPage";
 import InstructorListPage from "./pages/InstructorListPage";
 import InstructorDetailsPage from "./pages/InstructorDetailPage";
 import InstructorCreatePage from "./pages/InstructorCreatePage";
+import InstructorEditPage from "./pages/InstructorEditPage";
 
 import ProtectedRoute from "./routes/ProtectedRoute";
 
@@ -56,7 +57,7 @@ function App() {
     path="/instructors/:id/edit"
     element={
         <ProtectedRoute adminOnly={true}>
-            <h1>Edit Instructor Page</h1>
+            <InstructorEditPage />
         </ProtectedRoute>
     }
 />

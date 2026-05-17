@@ -65,6 +65,12 @@ export default function InstructorListPage() {
                             View Details
                         </Link>
 
+                        <br />
+
+                        <Link to={`/instructors/${index}/edit`}>
+                            Edit
+                        </Link>
+
                     </div>
                 ))
             }
