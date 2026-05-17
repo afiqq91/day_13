@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function InstructorForm({ initialData, onSubmit, buttonText }) {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ function InstructorForm({ initialData, onSubmit, buttonText }) {
   });
 
   const [errors, setErrors] = useState({});
+  const navigate = useNavigate();
 
   function handleChange(e) {
     const { name, value, type, checked } = e.target;
@@ -123,8 +125,20 @@ function InstructorForm({ initialData, onSubmit, buttonText }) {
         </label>
       </div>
 
-      <button type="submit">{buttonText}</button>
+      <button type="submit">
+        {buttonText}
+      </button>
+
+      <button
+        type="button"
+        onClick={() => navigate("/instructors")}
+      >
+        Cancel
+      </button>
+
     </form>
+
+
   );
 }
 
