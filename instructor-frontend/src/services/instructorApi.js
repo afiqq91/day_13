@@ -1,5 +1,7 @@
-// Day 13 Excercise 3
-const BASE_URL = "http://localhost:8080/api/v1/instructors";
+import axios from "axios";
+
+// Day 13 Exercise 5
+const BASE_URL = "http://localhost:8080/api/instructors";
 
 export async function getAllInstructors() {
 
@@ -17,15 +19,19 @@ export async function getInstructorById(id) {
 
 export async function createInstructor(instructorData) {
 
-    const response = await fetch(BASE_URL, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(instructorData),
-    });
+    const token = localStorage.getItem("token");
 
-    return response.json();
+    const response = await axios.post(
+        BASE_URL,
+        instructorData,
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        }
+    );
+
+    return response.data;
 }
 
 export async function updateInstructor(id, instructorData) {
