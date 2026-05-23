@@ -7,6 +7,7 @@ import { getAllInstructors } from "../services/instructorApi";
 export default function InstructorListPage() {
 
     const [instructors, setInstructors] = useState([]);
+
     const role = localStorage.getItem("role");
 
     const isAdmin = role === "ADMIN";
@@ -63,17 +64,11 @@ export default function InstructorListPage() {
                         <h3>{instructor.name}</h3>
 
                         <p>
-                            Specialization:
-                            {" "}
-                            {instructor.specialization}
+                            Specialization: {instructor.specialization}
                         </p>
 
                         <p>
-                            Experience:
-                            {" "}
-                            {instructor.yearsExperience}
-                            {" "}
-                            years
+                            Experience: {instructor.yearsExperience} years
                         </p>
 
                         <Link to={`/instructors/${index}`}>
@@ -84,7 +79,6 @@ export default function InstructorListPage() {
 
                         {
                             isAdmin && (
-
                                 <Link to={`/instructors/${index}/edit`}>
                                     Edit
                                 </Link>
